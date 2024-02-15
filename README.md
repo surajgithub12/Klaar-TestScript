@@ -1,4 +1,9 @@
 # Klaar-TestScript
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 public class KlaarLoginTest {
 
@@ -230,6 +235,153 @@ public class KlaarLoginTest {
         } else {
             System.out.println("New user name Deepa is not added");
         }
+
+ 
+        // Close the browser
+        driver.quit();
+    }
+}
+
+
+ # Test script for Test 2 - User custom fields
+
+ public class UserCustomFields {
+
+	    public static void main(String[] args) throws
+     {
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://dev.klaarhq.com");
+        
+        driver.findElement(By.xpath(" //input[@placeholder='Enter your password here']")).sendkeys("Klaar2021");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+        // Click on settings button
+
+        driver.findElement(By.xpath("(//button[@tabindex='0'])[7]")).click();
+        webelement userlist = driver.findElement(By.xpath("//a[@href='/settings/workspace/User-List']")).click();
+        if (userlist.isDisplayed()) {
+            System.out.println("Test Passed: Landed on All Users page ");
+        } else {
+            System.out.println("Test Failed: Not landed on All Users page");
+        }
+
+        // Navigate to custom field page
+	driver.findElement(By.xpath( "//div[@class='ant-tabs-tab ng-star-inserted ant-tabs-tab-active']]")).click();
+
+	// Add new custom field of type "date"
+ 	driver.findElement(By.xpath( " //input[@placeholder='Enter field name...']")).sendkeys("Klaar");
+        
+ 	 WebElement dropdown = driver.findElement(By.xpath("//input[@autocomplete='off']"));
+         
+        Select d = new Select(dropdown);
+        d.selectByVisibleText("Date");
+
+ 	driver.findElement(By.xpath("//button[@data-cy='modal-submit-button']")).click();
+
+        // Verify that the added custom field is reflected in the custom field page
+   	
+        webelement custom = driver.findElement(By.xpath("(//tr[@class='row ng-star-inserted']/descendant::td)[10]"));
+	if (custom.isDisplayed()) {
+            System.out.println("Test Passed:  Klaar is added successfully on custom field list ");
+        } else {
+            System.out.println("Test Failed:  Klaar is not added successfully on custom field list");
+        }
+
+
+       // Add a new custom field of type List with 3 list options
+
+       driver.findElement(By.xpath( " //input[@placeholder='Enter field name...']")).sendkeys("Best Klaar");
+        
+ 	 WebElement dropdown = driver.findElement(By.xpath("//input[@autocomplete='off']"));
+         
+        Select d = new Select(dropdown);
+        d.selectByVisibleText("list");
+	driver.findElement(By.xpath( "//input[@placeholder='Option List']")).sendkeys("K1");
+        webelement Add =  driver.findElement(By.xpath("(//div[@class='modal footer-available']/descendant::button)[2]"));
+        Add.click();
+	driver.findElement(By.xpath( "(//input[@placeholder='Option List'])[2]")).sendkeys("K2");
+        Add.click();
+	driver.findElement(By.xpath( "(//input[@placeholder='Option List'])[3]")).sendkeys("K3");
+
+ 	driver.findElement(By.xpath("//button[@data-cy='modal-submit-button']")).click();
+
+  	// Verify that Best Klaar name is dispalayed on custom field list
+
+        webelement custom = driver.findElement(By.xpath("(//tr[@class='row ng-star-inserted']/descendant::td)[2]"));
+	 if (userlist.isDisplayed()) {
+            System.out.println("Test Passed: Best Klaar is added successfully on custom field list ");
+        } else {
+            System.out.println("Test Failed: Best Klaar is not added successfully on custom field list");
+        }
+
+        // Test the custom field switch on/off toggle and verify changes are reflected respectively in the user company details page
+
+ 	// Locate the toggle button element
+        WebElement toggleButton = driver.findElement(By.xpath("//button[@class='ant-switch ant-switch-checked']"));
+
+        // Get the initial state of the toggle button
+        boolean isToggleButtonEnabled = toggleButton.isSelected();
+        System.out.println("Toggle button is enabled: " + isToggleButtonEnabled);
+
+         // Switch off the toggle button if it's currently on
+        if (isToggleButtonEnabled) {
+            toggleButton.click();
+        }
+
+        // Get the new state of the toggle button
+        isToggleButtonDisabled = toggleButton.isSelected();
+        System.out.println("Toggle button is disabled: " + isToggleButtonDisabled);
+
+         // Switch on the toggle button if it's currently off
+        if (!isToggleButtonDisabled) {
+            toggleButton.click();
+        }
+
+       // Get the new state of the toggle button
+        isToggleButtonEnabled = toggleButton.isSelected();
+        System.out.println("Toggle button is enabled: " + isToggleButtonEnabled);
+
+       //  Delete the added custom field (Deleting Klaar)
+
+       driver.findElement(By.xpath(" (//span[@nztype='delete'])[3]")).click();
+
+      // Verify that deleted Klaar custom field is not dispalyed on custom field table
+       
+       Thread.sleep(2000);
+
+       List<WebElement> deletedElements = driver.findElements(By.xpath("(//tr[@class='row ng-star-inserted']/descendant::td)[10]"));
+
+      // Verify if the element is deleted
+      if (deletedElements.size() == 0) 
+      {
+     System.out.println("Element successfully deleted");
+     } else {
+              System.out.println("Element deletion failed");
+            }
+    
+     // Close the browser
+        driver.quit();
+    }
+}
+       
+
+      
+  
+
+       
+
+ 
+
+
+
+      
+        
+
+
 
         
         
