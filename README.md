@@ -1,4 +1,5 @@
 # Klaar-TestScript
+# Test 1 - Workspace setting
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -243,7 +244,7 @@ public class KlaarLoginTest {
 }
 
 
- # Test script for Test 2 - User custom fields
+ # Test script for Test 3 - User custom fields
 
  public class UserCustomFields {
        public static void main(String[] args) throws
@@ -310,7 +311,7 @@ public class KlaarLoginTest {
 
   	// Verify that Best Klaar name is dispalayed on custom field list
 
-        webelement custom = driver.findElement(By.xpath("(//tr[@class='row ng-star-inserted']/descendant::td)[2]"));
+        webelement userlist = driver.findElement(By.xpath("(//tr[@class='row ng-star-inserted']/descendant::td)[2]"));
 	 if (userlist.isDisplayed()) {
             System.out.println("Test Passed: Best Klaar is added successfully on custom field list ");
         } else {
