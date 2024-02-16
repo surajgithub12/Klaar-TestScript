@@ -125,9 +125,9 @@ public class KlaarLoginTest {
          
       
 # Test script for Test 2 - Add a New User 
+     
      public class AddUser {
-
-	    public static void main(String[] args) throws
+                           public static void main(String[] args) throws
      {
         System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
 
@@ -246,8 +246,7 @@ public class KlaarLoginTest {
  # Test script for Test 2 - User custom fields
 
  public class UserCustomFields {
-
-	    public static void main(String[] args) throws
+       public static void main(String[] args) throws
      {
         System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
 
